@@ -1,33 +1,14 @@
 <template>
   <div class="app">
-    <post-form @create="createPost"/>
-    <post-list :posts="posts"/>
+    <navbar></navbar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import PostList from "./components/PostList.vue"
-import PostForm from "./components/PostForm.vue"
-export default {
-  components: {
-    PostList,
-    PostForm,
-  },
-  data() {
-    return {
-      posts: [
-        {id: 1, title: 'JavaScript', description: 'It is description for title!'},
-        {id: 2, title: 'JavaScript 2', description: 'It is description for title 2 !'},
-        {id: 3, title: 'JavaScript 3', description: 'It is description for title 2 !'},
-      ],
-    }
-  },
-
-  methods: {
-    createPost(post) {
-      this.posts.push(post);
-    }
-  }
+import Navbar from "@/components/Navbar";
+  export default {
+    components: { Navbar }
 }
 </script>
 
@@ -41,5 +22,4 @@ export default {
 .app {
   padding: 20px;
 }
-
 </style>
