@@ -17,6 +17,12 @@
       >
         Store
       </my-button>
+      <my-button 
+        @click="$router.push('/composition')"
+        style="margin-left: 20px"
+      >
+        Composition API
+      </my-button>
     </div>
   </div>
 </template>
