@@ -1,18 +1,16 @@
 <template>
   <div v-if="posts.length > 0">
-    <h3>List of users: </h3>
-      <transition-group name="post-list">
-        <post-item
-          v-for="post in posts"
-          :post="post"
-          :key="post.id"
-          @remove="$emit('remove', post)"
-        />
-      </transition-group>
+    <h3>List of users:</h3>
+    <transition-group name="post-list">
+      <post-item
+        v-for="post in posts"
+        :post="post"
+        :key="post.id"
+        @remove="$emit('remove', post)"
+      />
+    </transition-group>
   </div>
-  <h2 v-else style="color: red">
-    List is empty!
-  </h2>
+  <h2 v-else style="color: red">List is empty!</h2>
 </template>
 
 <script>
@@ -25,9 +23,9 @@ export default {
     posts: {
       type: Array,
       requred: true,
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

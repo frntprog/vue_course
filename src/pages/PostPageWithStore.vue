@@ -8,11 +8,7 @@
       v-focus
     />
     <div class="app__btns">
-      <my-button
-        @click="showDialog"
-      >
-        Create Post
-      </my-button>
+      <my-button @click="showDialog"> Create Post </my-button>
       <my-select
         :model-value="selectedSort"
         @update:model-value="setSelectedSort"
@@ -20,9 +16,7 @@
       />
     </div>
     <my-dialog v-model:show="dialogVisible">
-      <post-form
-        @create="createPost"
-      />
+      <post-form @create="createPost" />
     </my-dialog>
     <post-list
       :posts="sortedAndSearchedPosts"
@@ -37,8 +31,8 @@
         :key="pageNumber"
         class="page"
         :class="{
-              'current-page': page === pageNumber
-            }"
+          'current-page': page === pageNumber,
+        }"
         @click="changePage(pageNumber)"
       >
         {{ pageNumber }}
@@ -48,38 +42,40 @@
 </template>
 
 <script>
-import PostList from "@/components/PostList.vue"
-import PostForm from "@/components/PostForm.vue"
-import MyInput from "@/components/UI/MyInput.vue"
-import {mapState, mapGetters, mapActions, mapMutations} from 'vuex';
+import PostList from "@/components/PostList.vue";
+import PostForm from "@/components/PostForm.vue";
+import MyInput from "@/components/UI/MyInput.vue";
+import { mapState, mapGetters, mapActions, mapMutations } from "vuex";
 
 export default {
   components: {
     PostList,
     PostForm,
-    MyInput
-},
-data() {
+    MyInput,
+  },
+  data() {
     return {
       dialogVisible: false,
-    }
+    };
   },
   methods: {
     ...mapMutations({
-      setPage: 'post/setPage',
-      setSearchQuery: 'post/setSearchQuery',
-      setSelectedSort: 'post/setSelectedSort',
+      setPage: "post/setPage",
+      setSearchQuery: "post/setSearchQuery",
+      setSelectedSort: "post/setSelectedSort",
     }),
     ...mapActions({
-      loadMorePosts: 'post/loadMorePosts',
-      fetchPosts: 'post/fetchPosts'
+      loadMorePosts: "post/loadMorePosts",
+      fetchPosts: "post/fetchPosts",
     }),
     createPost(post) {
       this.posts.push(post);
       this.dialogVisible = false;
     },
     removePost(post) {
-      this.posts = this.posts.filter(p => p.id !== post.id)
+      console.log(post);
+      console.log(this.posts.find((p) => p.id == post.id));
+      this.posts = this.posts.filter((p) => p.id !== post.id);
     },
     showDialog() {
       this.dialogVisible = true;
@@ -95,21 +91,21 @@ data() {
   },
   computed: {
     ...mapState({
-      posts: state => state.post.posts,
-      isPostsLoading: state => state.post.isPostsLoading,
-      selectedSort: state => state.post.selectedSort,
-      searchQuery: state => state.post.searchQuery,
-      page: state => state.post.page,
-      limit: state => state.post.limit,
-      totalPages: state => state.post.totalPages,
-      sortOptions: state => state.post.sortOptions
+      posts: (state) => state.post.posts,
+      isPostsLoading: (state) => state.post.isPostsLoading,
+      selectedSort: (state) => state.post.selectedSort,
+      searchQuery: (state) => state.post.searchQuery,
+      page: (state) => state.post.page,
+      limit: (state) => state.post.limit,
+      totalPages: (state) => state.post.totalPages,
+      sortOptions: (state) => state.post.sortOptions,
     }),
     ...mapGetters({
-      sortedPosts: 'post/sortedPosts',
-      sortedAndSearchedPosts: 'post/sortedAndSearchedPosts'
-    })
+      sortedPosts: "post/sortedPosts",
+      sortedAndSearchedPosts: "post/sortedAndSearchedPosts",
+    }),
   },
-}
+};
 </script>
 
 <style>
@@ -137,5 +133,4 @@ data() {
   height: 30px;
   background: gray;
 }
-
 </style>
