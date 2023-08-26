@@ -1,5 +1,7 @@
 # vue_course
 
+Complete Vue 3 course with all key aspects.
+
 ## Project setup
 ```
 npm install
